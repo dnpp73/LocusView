@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LocusViewSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DAe-96-dBC" customClass="DPLocusView" customModule="LocusViewSample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="350"/>
+                                <animations/>
+                                <color key="backgroundColor" red="1" green="0.22960237950000001" blue="0.057034433959999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="point" keyPath="currentPoint">
+                                        <point key="value" x="0.0" y="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="circleDiameter">
+                                        <real key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                        <color key="value" red="0.27422337171527911" green="0.26003276074746673" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tailColor">
+                                        <color key="value" red="0.46717655436640448" green="1" blue="0.56569315719516045" alpha="0.5" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="cK1-By-31M" appends="YES" id="deb-qC-IwW"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xyg-nK-nNR" userLabel="Controls View">
+                                <rect key="frame" x="0.0" y="350" width="600" height="250"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BxJ-Ql-NgR">
+                                        <rect key="frame" x="492" y="142" width="100" height="100"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="76c-0I-Mh3"/>
+                                            <constraint firstAttribute="width" constant="100" id="B1N-5O-L7Z"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="8BN-uN-Ocb" appends="YES" id="x4i-Gj-IMF"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="BxJ-Ql-NgR" secondAttribute="bottom" constant="8" id="1lC-UO-DBa"/>
+                                    <constraint firstAttribute="trailing" secondItem="BxJ-Ql-NgR" secondAttribute="trailing" constant="8" id="1p1-4O-L1k"/>
+                                    <constraint firstAttribute="height" constant="250" id="J7X-Fr-Q7c"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DAe-96-dBC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="19Y-TN-2DW"/>
+                            <constraint firstItem="xyg-nK-nNR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2Rz-g5-pwP"/>
+                            <constraint firstItem="xyg-nK-nNR" firstAttribute="top" secondItem="DAe-96-dBC" secondAttribute="bottom" id="D8i-zn-sOP"/>
+                            <constraint firstAttribute="trailing" secondItem="DAe-96-dBC" secondAttribute="trailing" id="Un9-cS-gDC"/>
+                            <constraint firstItem="DAe-96-dBC" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="VY2-Ru-KHc"/>
+                            <constraint firstAttribute="trailing" secondItem="xyg-nK-nNR" secondAttribute="trailing" id="kf8-fN-fvd"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="xyg-nK-nNR" secondAttribute="bottom" id="oaI-ol-Rpk"/>
+                            <constraint firstItem="xyg-nK-nNR" firstAttribute="top" secondItem="DAe-96-dBC" secondAttribute="bottom" id="zTW-eu-xg2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="controlPanGestureRecognizer" destination="8BN-uN-Ocb" id="5Dd-ru-ulg"/>
+                        <outlet property="locusPanGestureRecognizer" destination="cK1-By-31M" id="6Le-sZ-p90"/>
+                        <outlet property="locusView" destination="DAe-96-dBC" id="Nbn-yl-CL5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="8BN-uN-Ocb" userLabel="Control Pan Gesture Recognizer">
+                    <connections>
+                        <action selector="handleControlPanGestureRecognizer:" destination="BYZ-38-t0r" id="2Gb-Kh-Cmy"/>
+                        <outlet property="delegate" destination="BYZ-38-t0r" id="XkY-lU-BHS"/>
+                    </connections>
+                </panGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="cK1-By-31M" userLabel="Locus Pan Gesture Recognizer">
+                    <connections>
+                        <action selector="handleLocusPanGestureRecognizer:" destination="BYZ-38-t0r" id="axO-hB-doq"/>
+                    </connections>
+                </panGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="380" y="447"/>
+        </scene>
+    </scenes>
+</document>

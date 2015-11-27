@@ -1,0 +1,298 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		190BEFA71C08BB6200326CB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190BEFA61C08BB6200326CB3 /* AppDelegate.swift */; };
+		190BEFA91C08BB6200326CB3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190BEFA81C08BB6200326CB3 /* ViewController.swift */; };
+		190BEFAC1C08BB6200326CB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 190BEFAA1C08BB6200326CB3 /* Main.storyboard */; };
+		190BEFAE1C08BB6200326CB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 190BEFAD1C08BB6200326CB3 /* Assets.xcassets */; };
+		190BEFB11C08BB6200326CB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 190BEFAF1C08BB6200326CB3 /* LaunchScreen.storyboard */; };
+		190BEFB81C08BD7600326CB3 /* DPLocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190BEFB71C08BD7600326CB3 /* DPLocusView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		190BEFA31C08BB6200326CB3 /* LocusViewSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocusViewSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		190BEFA61C08BB6200326CB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		190BEFA81C08BB6200326CB3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		190BEFAB1C08BB6200326CB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		190BEFAD1C08BB6200326CB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		190BEFB01C08BB6200326CB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		190BEFB21C08BB6200326CB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		190BEFB71C08BD7600326CB3 /* DPLocusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPLocusView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		190BEFA01C08BB6200326CB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		190BEF981C08BB3C00326CB3 = {
+			isa = PBXGroup;
+			children = (
+				190BEFB61C08BD4700326CB3 /* LocusView */,
+				190BEFA51C08BB6200326CB3 /* LocusViewSample */,
+				190BEFA41C08BB6200326CB3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		190BEFA41C08BB6200326CB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				190BEFA31C08BB6200326CB3 /* LocusViewSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		190BEFA51C08BB6200326CB3 /* LocusViewSample */ = {
+			isa = PBXGroup;
+			children = (
+				190BEFA61C08BB6200326CB3 /* AppDelegate.swift */,
+				190BEFA81C08BB6200326CB3 /* ViewController.swift */,
+				190BEFAA1C08BB6200326CB3 /* Main.storyboard */,
+				190BEFAD1C08BB6200326CB3 /* Assets.xcassets */,
+				190BEFAF1C08BB6200326CB3 /* LaunchScreen.storyboard */,
+				190BEFB21C08BB6200326CB3 /* Info.plist */,
+			);
+			path = LocusViewSample;
+			sourceTree = "<group>";
+		};
+		190BEFB61C08BD4700326CB3 /* LocusView */ = {
+			isa = PBXGroup;
+			children = (
+				190BEFB71C08BD7600326CB3 /* DPLocusView.swift */,
+			);
+			path = LocusView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		190BEFA21C08BB6200326CB3 /* LocusViewSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 190BEFB31C08BB6200326CB3 /* Build configuration list for PBXNativeTarget "LocusViewSample" */;
+			buildPhases = (
+				190BEF9F1C08BB6200326CB3 /* Sources */,
+				190BEFA01C08BB6200326CB3 /* Frameworks */,
+				190BEFA11C08BB6200326CB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LocusViewSample;
+			productName = LocusViewSample;
+			productReference = 190BEFA31C08BB6200326CB3 /* LocusViewSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		190BEF991C08BB3C00326CB3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DP;
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = dnpp.org;
+				TargetAttributes = {
+					190BEFA21C08BB6200326CB3 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 190BEF9C1C08BB3C00326CB3 /* Build configuration list for PBXProject "LocusView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 190BEF981C08BB3C00326CB3;
+			productRefGroup = 190BEFA41C08BB6200326CB3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				190BEFA21C08BB6200326CB3 /* LocusViewSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		190BEFA11C08BB6200326CB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				190BEFB11C08BB6200326CB3 /* LaunchScreen.storyboard in Resources */,
+				190BEFAE1C08BB6200326CB3 /* Assets.xcassets in Resources */,
+				190BEFAC1C08BB6200326CB3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		190BEF9F1C08BB6200326CB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				190BEFA91C08BB6200326CB3 /* ViewController.swift in Sources */,
+				190BEFA71C08BB6200326CB3 /* AppDelegate.swift in Sources */,
+				190BEFB81C08BD7600326CB3 /* DPLocusView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		190BEFAA1C08BB6200326CB3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				190BEFAB1C08BB6200326CB3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		190BEFAF1C08BB6200326CB3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				190BEFB01C08BB6200326CB3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		190BEF9D1C08BB3C00326CB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		190BEF9E1C08BB3C00326CB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		190BEFB41C08BB6200326CB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = LocusViewSample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.dnpp.LocusViewSample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		190BEFB51C08BB6200326CB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = LocusViewSample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.dnpp.LocusViewSample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		190BEF9C1C08BB3C00326CB3 /* Build configuration list for PBXProject "LocusView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				190BEF9D1C08BB3C00326CB3 /* Debug */,
+				190BEF9E1C08BB3C00326CB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		190BEFB31C08BB6200326CB3 /* Build configuration list for PBXNativeTarget "LocusViewSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				190BEFB41C08BB6200326CB3 /* Debug */,
+				190BEFB51C08BB6200326CB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 190BEF991C08BB3C00326CB3 /* Project object */;
+}
