@@ -20,13 +20,13 @@ class LocusView: UIView {
             return normalizePoint(circleLayer.position)
         }
         set {
+            pointHistories.removeAll()
             CATransaction.begin()
             CATransaction.setDisableActions(true)
             circleLayer.removeAllAnimations()
             circleLayer.position = realizePoint(newValue)
-            tailLayer.path = bezierPathFromPointHistories.CGPath
+            tailLayer.path = nil
             CATransaction.commit()
-            pointHistories.removeAll()
         }
     }
     
@@ -35,9 +35,9 @@ class LocusView: UIView {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
             let rect = CGRectMake(0, 0, circleDiameter, circleDiameter)
-            circleLayer.path   = UIBezierPath(ovalInRect: rect).CGPath
-            circleLayer.bounds = rect
-            tailLayer.path     = bezierPathFromPointHistories.CGPath
+            circleLayer.path    = UIBezierPath(ovalInRect: rect).CGPath
+            circleLayer.bounds  = rect
+            tailLayer.lineWidth = circleDiameter
             CATransaction.commit()
         }
     }
@@ -55,7 +55,7 @@ class LocusView: UIView {
         didSet {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
-            tailLayer.fillColor = tailColor.CGColor
+            tailLayer.strokeColor = tailColor.CGColor
             CATransaction.commit()
         }
     }
@@ -82,10 +82,13 @@ class LocusView: UIView {
     
     private let tailLayer: CAShapeLayer = { () -> CAShapeLayer in
         let tailLayer = CAShapeLayer()
-        tailLayer.strokeColor = UIColor.clearColor().CGColor
+        tailLayer.fillColor = UIColor.clearColor().CGColor
+        tailLayer.lineJoin  = kCALineJoinRound
+        tailLayer.lineCap   = kCALineCapRound
         
         // tailColor の didSet でも変えているけど初期値を入れておく
-        tailLayer.fillColor = defaultTailColor.CGColor
+        tailLayer.strokeColor = defaultTailColor.CGColor
+        tailLayer.lineWidth   = defaultCircleDiameter
         
         return tailLayer
     }()
@@ -140,86 +143,11 @@ class LocusView: UIView {
                 return uniqPoints
             }()
             
-            func makeMoveToPoint(fromPoint: CGPoint, toPoint: CGPoint) -> CGPoint {
-                let rx: CGFloat, ry: CGFloat
-                if toPoint.x > fromPoint.x && toPoint.y >= fromPoint.y {
-                    // 第 1 象限のときは第 2 象限に
-                    rx = -1.0
-                    ry =  1.0
-                }
-                else if fromPoint.x >= toPoint.x && toPoint.y > fromPoint.y {
-                    // 第 2 象限のときは第 3 象限に
-                    rx = -1.0
-                    ry = -1.0
-                }
-                else if fromPoint.x > toPoint.x && fromPoint.y >= toPoint.y {
-                    // 第 3 象限のときは第 4 象限に
-                    rx =  1.0
-                    ry = -1.0
-                }
-                else {
-                    // 第 4 象限のときは第 1 象限に
-                    rx =  1.0
-                    ry =  1.0
-                }
-                let angle  = atan2(abs(toPoint.y-fromPoint.y), abs(toPoint.x-fromPoint.x))
-                let real   = realizePoint(toPoint)
-                let radius = circleDiameter / 2.0
-                let dx     = sin(angle) * radius * rx
-                let dy     = cos(angle) * radius * ry
-                return CGPointMake(real.x + dx, real.y + dy)
-            }
-            
             let path: UIBezierPath = UIBezierPath()
             path.moveToPoint(realizePoint(currentPresentationPoint)) // 最初と最後は必ず現在の値
-            
-            if uniqPoints.count > 2 {
-                var b = currentPresentationPoint
-                
-                // 円の中心から尾の先まで行って
-                for p in uniqPoints {
-                    path.addLineToPoint(makeMoveToPoint(b, toPoint: p))
-                    b = p
-                }
-                
-                // 端に半円を入れて
-                if let toPoint = uniqPoints.last {
-                    let fromPoint = uniqPoints[uniqPoints.count-2]
-                    let angle: CGFloat = atan2(abs(toPoint.y-fromPoint.y), abs(toPoint.x-fromPoint.x))
-                    let startAngle: CGFloat
-                    if toPoint.x > fromPoint.x && toPoint.y >= fromPoint.y {
-                        // 第 1 象限のときは第 2 象限に
-                        startAngle = CGFloat(M_PI) / 2.0 + angle
-                    }
-                    else if fromPoint.x >= toPoint.x && toPoint.y > fromPoint.y {
-                        // 第 2 象限のときは第 3 象限に
-                        startAngle = CGFloat(M_PI) / 2.0 * 3.0 - angle
-                    }
-                    else if fromPoint.x > toPoint.x && fromPoint.y >= toPoint.y {
-                        // 第 3 象限のときは第 4 象限に
-                        startAngle = CGFloat(M_PI) / 2.0 * 3.0 + angle
-                    }
-                    else {
-                        // 第 4 象限のときは第 1 象限に
-                        startAngle = CGFloat(M_PI) / 2.0 - angle
-                    }
-                    path.addArcWithCenter(realizePoint(toPoint), radius: circleDiameter / 2.0, startAngle: startAngle, endAngle: startAngle + CGFloat(M_PI), clockwise: false)
-                }
-                
-                // 尾の先から円の中心まで戻ってくる
-                for p in uniqPoints.reverse() {
-                    if b == p {
-                        continue
-                    }
-                    path.addLineToPoint(makeMoveToPoint(b, toPoint: p))
-                    b = p
-                }
-                
+            for p in uniqPoints {
+                path.addLineToPoint(realizePoint(p))
             }
-            
-            path.addLineToPoint(realizePoint(currentPresentationPoint)) // 最初と最後は必ず現在の値
-            path.closePath()
-            
             return path
         }
     }
