@@ -55,7 +55,6 @@ class DPLocusView: UIView {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
             tailLayer.fillColor   = tailColor.CGColor
-            tailLayer.strokeColor = tailColor.CGColor
             CATransaction.commit()
         }
     }
@@ -82,10 +81,10 @@ class DPLocusView: UIView {
     
     private let tailLayer: CAShapeLayer = { () -> CAShapeLayer in
         let tailLayer = CAShapeLayer()
+        tailLayer.strokeColor = UIColor.clearColor().CGColor
         
         // tailColor の didSet でも変えているけど初期値を入れておく
-        tailLayer.strokeColor = defaultTailColor.CGColor
-        tailLayer.fillColor   = defaultTailColor.CGColor
+        tailLayer.fillColor = defaultTailColor.CGColor
         
         return tailLayer
     }()
@@ -133,14 +132,53 @@ class DPLocusView: UIView {
                 return uniqPoints
             }()
             
+            func makeMoveToPoint(fromPoint: CGPoint, toPoint: CGPoint) -> CGPoint {
+                let rx: CGFloat, ry: CGFloat
+                if toPoint.x > fromPoint.x && toPoint.y >= fromPoint.y {
+                    // 第 1 象限のときは第 2 象限に
+                    rx = -1.0
+                    ry =  1.0
+                }
+                else if fromPoint.x >= toPoint.x && toPoint.y > fromPoint.y {
+                    // 第 2 象限のときは第 3 象限に
+                    rx = -1.0
+                    ry = -1.0
+                }
+                else if fromPoint.x > toPoint.x && fromPoint.y >= toPoint.y {
+                    // 第 3 象限のときは第 4 象限に
+                    rx =  1.0
+                    ry = -1.0
+                }
+                else {
+                    // 第 4 象限のときは第 1 象限に
+                    rx =  1.0
+                    ry =  1.0
+                }
+                let angle  = atan2(abs(toPoint.y-fromPoint.y), abs(toPoint.x-fromPoint.x))
+                let real   = realizePoint(toPoint)
+                let radius = circleDiameter / 2.0
+                let dx     = sin(angle) * radius * rx
+                let dy     = cos(angle) * radius * ry
+                return CGPointMake(real.x + dx, real.y + dy)
+            }
+            
             let path: UIBezierPath = UIBezierPath()
-            path.moveToPoint(realizePoint(currentPresentationPoint))
-            for point in uniqPoints {
-                path.addLineToPoint(realizePoint(point))
+            path.moveToPoint(realizePoint(currentPresentationPoint)) // 最初と最後は必ず現在の値
+            
+            var b = currentPresentationPoint
+            for p in uniqPoints {
+                path.addLineToPoint(makeMoveToPoint(b, toPoint: p))
+                b = p
             }
-            for point in uniqPoints.reverse() {
-                path.addLineToPoint(realizePoint(point))
+            if let last = uniqPoints.last {
+                path.addLineToPoint(realizePoint(last))
             }
+            for p in uniqPoints.reverse() {
+                path.addLineToPoint(makeMoveToPoint(b, toPoint: p))
+                b = p
+            }
+            
+            path.addLineToPoint(realizePoint(currentPresentationPoint)) // 最初と最後は必ず現在の値
             return path
         }
     }
