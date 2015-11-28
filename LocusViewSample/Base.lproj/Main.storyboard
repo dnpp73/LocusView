@@ -164,7 +164,7 @@
                                                     <rect key="frame" x="8" y="16" width="109" height="14.5"/>
                                                 </variation>
                                             </label>
-                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="KRF-wt-te2">
+                                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="KRF-wt-te2">
                                                 <rect key="frame" x="124" y="9" width="417" height="31"/>
                                                 <animations/>
                                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES" misplaced="YES">
@@ -174,7 +174,7 @@
                                                     <action selector="valueChangedTailHistorySecondsSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="oH1-uI-JhW"/>
                                                 </connections>
                                             </slider>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81D-qs-pVO">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="81D-qs-pVO">
                                                 <rect key="frame" x="547" y="16" width="45" height="14.5"/>
                                                 <animations/>
                                                 <constraints>

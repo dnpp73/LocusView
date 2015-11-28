@@ -10,7 +10,7 @@ class LocusView: UIView {
     static let defaultTailColor:   UIColor = UIColor(white: 1.0, alpha: 0.5)
     
     static let defaultAnimationDuration:  NSTimeInterval = 0.5
-    static let defaultTailHistorySeconds: NSTimeInterval = 1.0
+    static let defaultTailHistorySeconds: NSTimeInterval = 0.3
     
     // MARK:  Public Ivars
     
