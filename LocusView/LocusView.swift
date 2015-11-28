@@ -1,6 +1,6 @@
 import UIKit
 
-class DPLocusView: UIView {
+class LocusView: UIView {
     
     // MARK:  Constans
     
@@ -26,6 +26,7 @@ class DPLocusView: UIView {
             circleLayer.position = realizePoint(newValue)
             tailLayer.path = bezierPathFromPointHistories.CGPath
             CATransaction.commit()
+            pointHistories.removeAll()
         }
     }
     

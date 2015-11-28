@@ -2,7 +2,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var locusView: DPLocusView!
+    @IBOutlet weak var locusView: LocusView!
     
     @IBOutlet weak var controlPanGestureRecognizer: UIPanGestureRecognizer!
     @IBOutlet weak var locusPanGestureRecognizer:   UIPanGestureRecognizer!
@@ -22,7 +22,6 @@ class ViewController: UIViewController {
         let location = sender.locationInView(targetView)
         let normalizedPoint = CGPointMake(location.x / targetView.bounds.size.width, location.y / targetView.bounds.size.height)
         
-        /*
         switch sender {
         case controlPanGestureRecognizer:
             locusView.moveToPoint(normalizedPoint)
@@ -31,8 +30,6 @@ class ViewController: UIViewController {
         default:
             break
         }
-        */
-        locusView.moveToPoint(normalizedPoint)
     }
     
     @IBAction func valueChangedDiameterSlider(sender: UISlider) {
@@ -51,23 +48,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpInsideRestoreDefaultButton(sender: UIButton) {
-        let diameter             = DPLocusView.defaultCircleDiameter
+        let diameter             = LocusView.defaultCircleDiameter
         diameterSlider.value     = Float(diameter)
         diameterLabel.text       = String(format: "%.2f", arguments: [diameter])
         locusView.circleDiameter = CGFloat(diameter)
         
-        let animationDuration         = DPLocusView.defaultAnimationDuration
+        let animationDuration         = LocusView.defaultAnimationDuration
         animationDurationSlider.value = Float(animationDuration)
         animationDurationLabel.text   = String(format: "%.2f", arguments: [animationDuration])
         locusView.animationDuration   = NSTimeInterval(animationDuration)
         
-        let tailHistorySeconds         = DPLocusView.defaultTailHistorySeconds
+        let tailHistorySeconds         = LocusView.defaultTailHistorySeconds
         tailHistorySecondsSlider.value = Float(tailHistorySeconds)
         tailHistorySecondsLabel.text   = String(format: "%.2f", arguments: [tailHistorySeconds])
         locusView.tailHistorySeconds   = NSTimeInterval(tailHistorySeconds)
         
-        locusView.circleColor = DPLocusView.defaultCircleColor
-        locusView.tailColor   = DPLocusView.defaultTailColor
+        locusView.circleColor = LocusView.defaultCircleColor
+        locusView.tailColor   = LocusView.defaultTailColor
     }
     
     private var randomColor: UIColor {

@@ -12,7 +12,7 @@
 		190BEFAC1C08BB6200326CB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 190BEFAA1C08BB6200326CB3 /* Main.storyboard */; };
 		190BEFAE1C08BB6200326CB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 190BEFAD1C08BB6200326CB3 /* Assets.xcassets */; };
 		190BEFB11C08BB6200326CB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 190BEFAF1C08BB6200326CB3 /* LaunchScreen.storyboard */; };
-		190BEFB81C08BD7600326CB3 /* DPLocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190BEFB71C08BD7600326CB3 /* DPLocusView.swift */; };
+		190BEFB81C08BD7600326CB3 /* LocusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190BEFB71C08BD7600326CB3 /* LocusView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		190BEFAD1C08BB6200326CB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		190BEFB01C08BB6200326CB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		190BEFB21C08BB6200326CB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		190BEFB71C08BD7600326CB3 /* DPLocusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPLocusView.swift; sourceTree = "<group>"; };
+		190BEFB71C08BD7600326CB3 /* LocusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocusView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +70,7 @@
 		190BEFB61C08BD4700326CB3 /* LocusView */ = {
 			isa = PBXGroup;
 			children = (
-				190BEFB71C08BD7600326CB3 /* DPLocusView.swift */,
+				190BEFB71C08BD7600326CB3 /* LocusView.swift */,
 			);
 			path = LocusView;
 			sourceTree = "<group>";
@@ -149,7 +149,7 @@
 			files = (
 				190BEFA91C08BB6200326CB3 /* ViewController.swift in Sources */,
 				190BEFA71C08BB6200326CB3 /* AppDelegate.swift in Sources */,
-				190BEFB81C08BD7600326CB3 /* DPLocusView.swift in Sources */,
+				190BEFB81C08BD7600326CB3 /* LocusView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +291,7 @@
 				190BEFB51C08BB6200326CB3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
