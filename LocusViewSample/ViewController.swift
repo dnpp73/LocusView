@@ -22,6 +22,7 @@ class ViewController: UIViewController {
         let location = sender.locationInView(targetView)
         let normalizedPoint = CGPointMake(location.x / targetView.bounds.size.width, location.y / targetView.bounds.size.height)
         
+        /*
         switch sender {
         case controlPanGestureRecognizer:
             locusView.moveToPoint(normalizedPoint)
@@ -30,10 +31,12 @@ class ViewController: UIViewController {
         default:
             break
         }
+        */
+        locusView.moveToPoint(normalizedPoint)
     }
     
     @IBAction func valueChangedDiameterSlider(sender: UISlider) {
-        diameterLabel.text = String(format: "%.2f", arguments: [sender.value])
+        diameterLabel.text       = String(format: "%.2f", arguments: [sender.value])
         locusView.circleDiameter = CGFloat(sender.value)
     }
     

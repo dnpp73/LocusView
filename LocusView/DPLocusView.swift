@@ -89,7 +89,7 @@ class DPLocusView: UIView {
         return tailLayer
     }()
     
-    private let timerInterval: NSTimeInterval = 1.0 / 60.0 // 60 fps ってことで
+    private let timerInterval: NSTimeInterval = 1.0 / 100.0 // 100 Hz ってことで
 
     // MARK:  Private Ivars
     
