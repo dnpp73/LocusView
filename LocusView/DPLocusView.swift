@@ -54,7 +54,7 @@ class DPLocusView: UIView {
         didSet {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
-            tailLayer.fillColor   = tailColor.CGColor
+            tailLayer.fillColor = tailColor.CGColor
             CATransaction.commit()
         }
     }
@@ -119,11 +119,18 @@ class DPLocusView: UIView {
     private var bezierPathFromPointHistories: UIBezierPath {
         get {
             // pointHistories から隣合う重複を排除（単純な uniq ではないよ）して逆順にした配列を生成しとく
+            // ここで隣合う距離が近いやつも排除しとくと割と綺麗な path になる
             let uniqPoints: [CGPoint] = { () -> [CGPoint] in
                 var uniqPoints: [CGPoint] = []
                 var beforePoint: CGPoint = currentPresentationPoint
                 for point in pointHistories.reverse() {
+                    // 単純な重複削除
                     if point == beforePoint {
+                        continue
+                    }
+                    // 距離が近ければ削除。だいたい 0.5 くらいで良いと思う。あまり大きくしすぎるとカクカクになる。
+                    let distance: CGFloat = sqrt(pow(point.x - beforePoint.x, 2.0) + pow(point.y - beforePoint.y, 2.0)) * (bounds.size.width + bounds.size.height / 2.0)
+                    if distance < 0.5 {
                         continue
                     }
                     beforePoint = point
@@ -165,20 +172,53 @@ class DPLocusView: UIView {
             let path: UIBezierPath = UIBezierPath()
             path.moveToPoint(realizePoint(currentPresentationPoint)) // 最初と最後は必ず現在の値
             
-            var b = currentPresentationPoint
-            for p in uniqPoints {
-                path.addLineToPoint(makeMoveToPoint(b, toPoint: p))
-                b = p
-            }
-            if let last = uniqPoints.last {
-                path.addLineToPoint(realizePoint(last))
-            }
-            for p in uniqPoints.reverse() {
-                path.addLineToPoint(makeMoveToPoint(b, toPoint: p))
-                b = p
+            if uniqPoints.count > 2 {
+                var b = currentPresentationPoint
+                
+                // 円の中心から尾の先まで行って
+                for p in uniqPoints {
+                    path.addLineToPoint(makeMoveToPoint(b, toPoint: p))
+                    b = p
+                }
+                
+                // 端に半円を入れて
+                if let toPoint = uniqPoints.last {
+                    let fromPoint = uniqPoints[uniqPoints.count-2]
+                    let angle: CGFloat = atan2(abs(toPoint.y-fromPoint.y), abs(toPoint.x-fromPoint.x))
+                    let startAngle: CGFloat
+                    if toPoint.x > fromPoint.x && toPoint.y >= fromPoint.y {
+                        // 第 1 象限のときは第 2 象限に
+                        startAngle = CGFloat(M_PI) / 2.0 + angle
+                    }
+                    else if fromPoint.x >= toPoint.x && toPoint.y > fromPoint.y {
+                        // 第 2 象限のときは第 3 象限に
+                        startAngle = CGFloat(M_PI) / 2.0 * 3.0 - angle
+                    }
+                    else if fromPoint.x > toPoint.x && fromPoint.y >= toPoint.y {
+                        // 第 3 象限のときは第 4 象限に
+                        startAngle = CGFloat(M_PI) / 2.0 * 3.0 + angle
+                    }
+                    else {
+                        // 第 4 象限のときは第 1 象限に
+                        startAngle = CGFloat(M_PI) / 2.0 - angle
+                    }
+                    path.addArcWithCenter(realizePoint(toPoint), radius: circleDiameter / 2.0, startAngle: startAngle, endAngle: startAngle + CGFloat(M_PI), clockwise: false)
+                }
+                
+                // 尾の先から円の中心まで戻ってくる
+                for p in uniqPoints.reverse() {
+                    if b == p {
+                        continue
+                    }
+                    path.addLineToPoint(makeMoveToPoint(b, toPoint: p))
+                    b = p
+                }
+                
             }
             
             path.addLineToPoint(realizePoint(currentPresentationPoint)) // 最初と最後は必ず現在の値
+            path.closePath()
+            
             return path
         }
     }
