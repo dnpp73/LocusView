@@ -7,31 +7,40 @@ class ViewController: UIViewController {
     @IBOutlet weak var controlPanGestureRecognizer: UIPanGestureRecognizer!
     @IBOutlet weak var locusPanGestureRecognizer:   UIPanGestureRecognizer!
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//    }
-//    
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        locusView.currentPoint = CGPointMake(0.5, 0.5)
-//    }
+    @IBOutlet weak var diameterLabel:           UILabel!
+    @IBOutlet weak var animationDurationLabel:  UILabel!
+    @IBOutlet weak var tailHistorySecondsLabel: UILabel!
     
-    @IBAction func handleControlPanGestureRecognizer(sender: UIPanGestureRecognizer) {
-        guard sender == controlPanGestureRecognizer, let targetView = sender.view else {
+    @IBAction func handlePanGestureRecognizer(sender: UIPanGestureRecognizer) {
+        guard let targetView = sender.view else {
             return
         }
+        
         let location = sender.locationInView(targetView)
         let normalizedPoint = CGPointMake(location.x / targetView.bounds.size.width, location.y / targetView.bounds.size.height)
-        locusView.moveToPoint(normalizedPoint)
-    }
-    
-    @IBAction func handleLocusPanGestureRecognizer(sender: UIPanGestureRecognizer) {
-        guard sender == locusPanGestureRecognizer, let targetView = sender.view where targetView == locusView else {
-            return
+        
+        switch sender {
+        case controlPanGestureRecognizer:
+            locusView.moveToPoint(normalizedPoint)
+        case locusPanGestureRecognizer:
+            locusView.currentPoint = normalizedPoint
+        default:
+            break
         }
-        let location = sender.locationInView(targetView)
-        let normalizedPoint = CGPointMake(location.x / targetView.bounds.size.width, location.y / targetView.bounds.size.height)
-        locusView.currentPoint = normalizedPoint
     }
     
+    @IBAction func valueChangedDiameterSlider(sender: UISlider) {
+        diameterLabel.text = String(format: "%.2f", arguments: [sender.value])
+        locusView.circleDiameter = CGFloat(sender.value)
+    }
+    
+    @IBAction func valueChangedAnimationDurationSlider(sender: UISlider) {
+        animationDurationLabel.text = String(format: "%.2f", arguments: [sender.value])
+        locusView.animationDuration = NSTimeInterval(sender.value)
+    }
+    
+    @IBAction func valueChangedTailHistorySecondsSlider(sender: UISlider) {
+        tailHistorySecondsLabel.text = String(format: "%.2f", arguments: [sender.value])
+        locusView.tailHistorySeconds = NSTimeInterval(sender.value)
+    }
 }

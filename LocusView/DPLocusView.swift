@@ -24,17 +24,20 @@ class DPLocusView: UIView {
             CATransaction.setDisableActions(true)
             circleLayer.removeAllAnimations()
             circleLayer.position = realizePoint(newValue)
-            tailLayer.path = bezierPathFromPointHistories().CGPath
+            tailLayer.path = bezierPathFromPointHistories.CGPath
             CATransaction.commit()
         }
     }
     
     @IBInspectable var circleDiameter: CGFloat = defaultCircleDiameter {
         didSet {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
             let rect = CGRectMake(0, 0, circleDiameter, circleDiameter)
             circleLayer.path   = UIBezierPath(ovalInRect: rect).CGPath
             circleLayer.bounds = rect
-            tailLayer.path     = bezierPathFromPointHistories().CGPath
+            tailLayer.path     = bezierPathFromPointHistories.CGPath
+            CATransaction.commit()
         }
     }
     
@@ -108,6 +111,34 @@ class DPLocusView: UIView {
         }
     }
     
+    private var bezierPathFromPointHistories: UIBezierPath {
+        get {
+            // pointHistories から隣合う重複を排除（単純な uniq ではないよ）して逆順にした配列を生成しとく
+            let uniqPoints: [CGPoint] = { () -> [CGPoint] in
+                var uniqPoints: [CGPoint] = []
+                var beforePoint: CGPoint = currentPresentationPoint
+                for point in pointHistories.reverse() {
+                    if point == beforePoint {
+                        continue
+                    }
+                    beforePoint = point
+                    uniqPoints.append(point)
+                }
+                return uniqPoints
+            }()
+            
+            let path: UIBezierPath = UIBezierPath()
+            path.moveToPoint(realizePoint(currentPresentationPoint))
+            for point in uniqPoints {
+                path.addLineToPoint(realizePoint(point))
+            }
+            for point in uniqPoints.reverse() {
+                path.addLineToPoint(realizePoint(point))
+            }
+            return path
+        }
+    }
+
     // MARK:  Initializer
 
     deinit {
@@ -143,7 +174,7 @@ class DPLocusView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        tailLayer.path = bezierPathFromPointHistories().CGPath
+        tailLayer.path = bezierPathFromPointHistories.CGPath
     }
     
     // MARK:  Move to Position
@@ -151,10 +182,10 @@ class DPLocusView: UIView {
     internal func moveToPoint(point: CGPoint) {
         CATransaction.begin()
         CATransaction.setAnimationDuration(animationDuration)
-        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear))
+        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut))
         
         circleLayer.position = realizePoint(point)
-        tailLayer.path = bezierPathFromPointHistories().CGPath
+        tailLayer.path = bezierPathFromPointHistories.CGPath
         
         CATransaction.commit()
     }
@@ -167,20 +198,6 @@ class DPLocusView: UIView {
     
     private func realizePoint(point: CGPoint) -> CGPoint {
         return CGPointMake(point.x * bounds.size.width, point.y * bounds.size.height);
-    }
-    
-    // MARK:  Tail
-    
-    private func bezierPathFromPointHistories() -> UIBezierPath {
-        let path: UIBezierPath = UIBezierPath()
-        path.moveToPoint(realizePoint(currentPresentationPoint))
-        for point in pointHistories.reverse() {
-            path.addLineToPoint(realizePoint(point))
-        }
-        for point in pointHistories {
-            path.addLineToPoint(realizePoint(point))
-        }
-        return path
     }
     
     // MARK:  Timer
