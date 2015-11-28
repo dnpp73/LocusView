@@ -9,7 +9,7 @@ class DPLocusView: UIView {
     static let defaultCircleColor: UIColor = UIColor.whiteColor()
     static let defaultTailColor:   UIColor = UIColor(white: 1.0, alpha: 0.5)
     
-    static let defaultAnimationDuration:  NSTimeInterval = 1.0
+    static let defaultAnimationDuration:  NSTimeInterval = 0.5
     static let defaultTailHistorySeconds: NSTimeInterval = 1.0
     
     // MARK:  Public Ivars
@@ -43,14 +43,20 @@ class DPLocusView: UIView {
     
     @IBInspectable var circleColor: UIColor = defaultCircleColor {
         didSet {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
             circleLayer.fillColor = circleColor.CGColor
+            CATransaction.commit()
         }
     }
     
     @IBInspectable var tailColor: UIColor = defaultTailColor {
         didSet {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
             tailLayer.fillColor   = tailColor.CGColor
             tailLayer.strokeColor = tailColor.CGColor
+            CATransaction.commit()
         }
     }
     
@@ -147,8 +153,11 @@ class DPLocusView: UIView {
     
     private func commonInit() {
         // tail から順番に addSubLayer しないと重なり順が変になるよ
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
         layer.addSublayer(tailLayer)
         layer.addSublayer(circleLayer)
+        CATransaction.commit()
     }
     
     override init(frame: CGRect) {
