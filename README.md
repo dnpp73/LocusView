@@ -35,20 +35,25 @@ locusView.currentPoint = point // アニメーションとかせずにパっと�
 
 # Carthage
 
+とりあえず `Cartfile` を作る
+
 ```sh
 touch Cartfile
 ```
 
-`Cartfile`
+`Cartfile` に以下を追記
+
 ```
 github "dnpp73/LocusView"
 ```
+
+で、ビルドする
 
 ```sh
 carthage update --platform iOS
 ```
 
-Carthage/Build/iOS 以下に framework と dSYM が出来るから xcodeproj に放り込んで、いくつか設定をする。
+そうすると `Carthage/Build/iOS` 以下に `framework` と `dSYM` が出来るから xcodeproj に放り込んで、いくつか設定をする。
 
 詳しくは [本家ドキュメント](https://github.com/Carthage/Carthage/blob/master/README.md) に書いてある。
 
