@@ -1,21 +1,21 @@
 import UIKit
 
-class LocusView: UIView {
+public class LocusView: UIView {
     
     // MARK:  Constans
     
-    static let defaultCircleDiameter: CGFloat = 40.0
+    static public let defaultCircleDiameter: CGFloat = 40.0
     
-    static let defaultCircleColor: UIColor = UIColor.whiteColor()
-    static let defaultTailColor:   UIColor = UIColor(white: 1.0, alpha: 0.5)
+    static public let defaultCircleColor: UIColor = UIColor.whiteColor()
+    static public let defaultTailColor:   UIColor = UIColor(white: 1.0, alpha: 0.5)
     
-    static let defaultAnimationDuration:  NSTimeInterval = 0.5
-    static let defaultTailHistorySeconds: NSTimeInterval = 0.3
+    static public let defaultAnimationDuration:  NSTimeInterval = 0.5
+    static public let defaultTailHistorySeconds: NSTimeInterval = 0.3
     
     // MARK:  Public Ivars
     
     // 左上原点の (0.0, 0.0) <-> (1.0, 1.0)
-    @IBInspectable var currentPoint: CGPoint {
+    @IBInspectable public var currentPoint: CGPoint {
         get {
             return normalizePoint(circleLayer.position)
         }
@@ -30,7 +30,7 @@ class LocusView: UIView {
         }
     }
     
-    @IBInspectable var circleDiameter: CGFloat = defaultCircleDiameter {
+    @IBInspectable public var circleDiameter: CGFloat = defaultCircleDiameter {
         didSet {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
@@ -42,7 +42,7 @@ class LocusView: UIView {
         }
     }
     
-    @IBInspectable var circleColor: UIColor = defaultCircleColor {
+    @IBInspectable public var circleColor: UIColor = defaultCircleColor {
         didSet {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
@@ -51,7 +51,7 @@ class LocusView: UIView {
         }
     }
     
-    @IBInspectable var tailColor: UIColor = defaultTailColor {
+    @IBInspectable public var tailColor: UIColor = defaultTailColor {
         didSet {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
@@ -60,9 +60,9 @@ class LocusView: UIView {
         }
     }
     
-    @IBInspectable var animationDuration:  NSTimeInterval = defaultAnimationDuration
+    @IBInspectable public var animationDuration:  NSTimeInterval = defaultAnimationDuration
     
-    @IBInspectable var tailHistorySeconds: NSTimeInterval = defaultTailHistorySeconds
+    @IBInspectable public var tailHistorySeconds: NSTimeInterval = defaultTailHistorySeconds
     
     // MARK:  Private Constants
     
@@ -172,14 +172,14 @@ class LocusView: UIView {
         commonInit()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
     
     // MARK:  UIView
     
-    override func didMoveToWindow() {
+    override public func didMoveToWindow() {
         super.didMoveToWindow()
         if let _ = window {
             startTimer()
@@ -188,14 +188,14 @@ class LocusView: UIView {
         }
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         tailLayer.path = bezierPathFromPointHistories.CGPath
     }
     
     // MARK:  Move to Position
     
-    internal func moveToPoint(point: CGPoint) {
+    public func moveToPoint(point: CGPoint) {
         CATransaction.begin()
         CATransaction.setAnimationDuration(animationDuration)
         CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut))

@@ -1,4 +1,5 @@
 import UIKit
+import LocusView
 
 class ViewController: UIViewController {
 
