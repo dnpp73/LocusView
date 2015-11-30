@@ -1,5 +1,7 @@
 # LocusView
 
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 ### これはなに
 
 `CALayer` の `Animation` の軌跡を `presentationLayer` から `NSTimer` で定期的に取って、そこから `UIBezierPath` で頑張って軌跡を描いてみる感じのやつ。
@@ -31,11 +33,31 @@ locusView.currentPoint = point // アニメーションとかせずにパっと�
 
 
 
+# Carthage
+
+```sh
+touch Cartfile
+```
+
+`Cartfile`
+```
+github "dnpp73/LocusView"
+```
+
+```sh
+carthage update --platform iOS
+```
+
+Carthage/Build/iOS 以下に framework と dSYM が出来るから xcodeproj に放り込んで、いくつか設定をする。
+
+詳しくは [本家ドキュメント](https://github.com/Carthage/Carthage/blob/master/README.md) に書いてある。
+
+
 # ToDo
 
-- `CocoaPods` や `carthage`
+- `CocoaPods`
+- Travis CI か CircleCI でテスト
 - `README` 英語で書く。
-- あとでやる。
 
 
 
