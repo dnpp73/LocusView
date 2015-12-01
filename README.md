@@ -1,6 +1,10 @@
 # LocusView
 
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Build Status](http://img.shields.io/travis/dnpp73/LocusView.svg?style=flat-square)](https://travis-ci.org/dnpp73/LocusView)
+[![Pod Version](http://img.shields.io/cocoapods/v/LocusView.svg?style=flat-square)](http://cocoadocs.org/docsets/LocusView/)
+[![Pod Platform](http://img.shields.io/cocoapods/p/LocusView.svg?style=flat-square)](http://cocoadocs.org/docsets/LocusView/)
+[![Pod License](http://img.shields.io/cocoapods/l/LocusView.svg?style=flat-square)](http://opensource.org/licenses/MIT)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat-square)](https://github.com/Carthage/Carthage)
 
 ### これはなに
 
