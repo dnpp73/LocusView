@@ -1,22 +1,21 @@
 import UIKit
 import LocusView
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
-    @IBOutlet weak var locusView: LocusView!
+    @IBOutlet private var locusView: LocusView!
     
-    @IBOutlet weak var controlPanGestureRecognizer: UIPanGestureRecognizer!
-    @IBOutlet weak var locusPanGestureRecognizer:   UIPanGestureRecognizer!
+    @IBOutlet private var controlPanGestureRecognizer: UIPanGestureRecognizer!
+    @IBOutlet private var locusPanGestureRecognizer:   UIPanGestureRecognizer!
 
-
-    @IBOutlet weak var diameterLabel:            UILabel!
-    @IBOutlet weak var diameterSlider:           UISlider!
-    @IBOutlet weak var animationDurationLabel:   UILabel!
-    @IBOutlet weak var animationDurationSlider:  UISlider!
-    @IBOutlet weak var tailHistorySecondsLabel:  UILabel!
-    @IBOutlet weak var tailHistorySecondsSlider: UISlider!
+    @IBOutlet private var diameterLabel:            UILabel!
+    @IBOutlet private var diameterSlider:           UISlider!
+    @IBOutlet private var animationDurationLabel:   UILabel!
+    @IBOutlet private var animationDurationSlider:  UISlider!
+    @IBOutlet private var tailHistorySecondsLabel:  UILabel!
+    @IBOutlet private var tailHistorySecondsSlider: UISlider!
     
-    @IBAction func handlePanGestureRecognizer(_ sender: UIPanGestureRecognizer) {
+    @IBAction private func handlePanGestureRecognizer(_ sender: UIPanGestureRecognizer) {
         guard let targetView = sender.view else {
             return
         }
@@ -26,7 +25,7 @@ class ViewController: UIViewController {
         
         switch sender {
         case controlPanGestureRecognizer:
-            locusView.moveToPoint(point: normalizedPoint)
+            locusView.move(to: normalizedPoint)
         case locusPanGestureRecognizer:
             locusView.currentPoint = normalizedPoint
         default:
@@ -34,22 +33,22 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func valueChangedDiameterSlider(_ sender: UISlider) {
+    @IBAction private func valueChangedDiameterSlider(_ sender: UISlider) {
         diameterLabel.text       = String(format: "%.2f", arguments: [sender.value])
         locusView.circleDiameter = CGFloat(sender.value)
     }
     
-    @IBAction func valueChangedAnimationDurationSlider(_ sender: UISlider) {
+    @IBAction private func valueChangedAnimationDurationSlider(_ sender: UISlider) {
         animationDurationLabel.text = String(format: "%.2f", arguments: [sender.value])
         locusView.animationDuration = TimeInterval(sender.value)
     }
     
-    @IBAction func valueChangedTailHistorySecondsSlider(_ sender: UISlider) {
+    @IBAction private func valueChangedTailHistorySecondsSlider(_ sender: UISlider) {
         tailHistorySecondsLabel.text = String(format: "%.2f", arguments: [sender.value])
         locusView.tailHistorySeconds = TimeInterval(sender.value)
     }
     
-    @IBAction func touchUpInsideRestoreDefaultButton(_ sender: UIButton) {
+    @IBAction private func touchUpInsideRestoreDefaultButton(_ sender: UIButton) {
         let diameter             = LocusView.defaultCircleDiameter
         diameterSlider.value     = Float(diameter)
         diameterLabel.text       = String(format: "%.2f", arguments: [diameter])
@@ -70,19 +69,17 @@ class ViewController: UIViewController {
     }
     
     private var randomColor: UIColor {
-        get {
-            func randomFloat() -> CGFloat {
-                return CGFloat(arc4random_uniform(50)) / CGFloat(100.0) + CGFloat(0.5)
-            }
-            return UIColor(red: randomFloat(), green: randomFloat(), blue: randomFloat(), alpha: randomFloat())
+        func randomFloat() -> CGFloat {
+            return CGFloat(arc4random_uniform(50)) / CGFloat(100.0) + CGFloat(0.5)
         }
+        return UIColor(red: randomFloat(), green: randomFloat(), blue: randomFloat(), alpha: randomFloat())
     }
     
-    @IBAction func touchUpInsideRandomCircleColorButton(_ sender: UIButton) {
+    @IBAction private func touchUpInsideRandomCircleColorButton(_ sender: UIButton) {
         locusView.circleColor = randomColor
     }
     
-    @IBAction func touchUpInsideRandomTailColorButton(_ sender: UIButton) {
+    @IBAction private func touchUpInsideRandomTailColorButton(_ sender: UIButton) {
         locusView.tailColor = randomColor
     }
     
