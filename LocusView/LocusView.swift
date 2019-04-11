@@ -6,25 +6,25 @@ public class LocusView: UIView {
     
     static public let defaultCircleDiameter: CGFloat = 40.0
     
-    static public let defaultCircleColor: UIColor = UIColor.whiteColor()
+    static public let defaultCircleColor: UIColor = UIColor.white
     static public let defaultTailColor:   UIColor = UIColor(white: 1.0, alpha: 0.5)
     
-    static public let defaultAnimationDuration:  NSTimeInterval = 0.5
-    static public let defaultTailHistorySeconds: NSTimeInterval = 0.3
+    static public let defaultAnimationDuration:  TimeInterval = 0.5
+    static public let defaultTailHistorySeconds: TimeInterval = 0.3
     
     // MARK:  Public Ivars
     
     // 左上原点の (0.0, 0.0) <-> (1.0, 1.0)
     @IBInspectable public var currentPoint: CGPoint {
         get {
-            return normalizePoint(circleLayer.position)
+            return normalizePoint(point: circleLayer.position)
         }
         set {
             pointHistories.removeAll()
             CATransaction.begin()
             CATransaction.setDisableActions(true)
             circleLayer.removeAllAnimations()
-            circleLayer.position = realizePoint(newValue)
+            circleLayer.position = realizePoint(point: newValue)
             tailLayer.path = nil
             CATransaction.commit()
         }
@@ -34,8 +34,8 @@ public class LocusView: UIView {
         didSet {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
-            let rect = CGRectMake(0, 0, circleDiameter, circleDiameter)
-            circleLayer.path    = UIBezierPath(ovalInRect: rect).CGPath
+            let rect = CGRect(x: 0, y: 0, width: circleDiameter, height: circleDiameter)
+            circleLayer.path    = UIBezierPath(ovalIn: rect).cgPath
             circleLayer.bounds  = rect
             tailLayer.lineWidth = circleDiameter
             CATransaction.commit()
@@ -46,7 +46,7 @@ public class LocusView: UIView {
         didSet {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
-            circleLayer.fillColor = circleColor.CGColor
+            circleLayer.fillColor = circleColor.cgColor
             CATransaction.commit()
         }
     }
@@ -55,26 +55,26 @@ public class LocusView: UIView {
         didSet {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
-            tailLayer.strokeColor = tailColor.CGColor
+            tailLayer.strokeColor = tailColor.cgColor
             CATransaction.commit()
         }
     }
     
-    @IBInspectable public var animationDuration:  NSTimeInterval = defaultAnimationDuration
+    @IBInspectable public var animationDuration:  TimeInterval = defaultAnimationDuration
     
-    @IBInspectable public var tailHistorySeconds: NSTimeInterval = defaultTailHistorySeconds
+    @IBInspectable public var tailHistorySeconds: TimeInterval = defaultTailHistorySeconds
     
     // MARK:  Private Constants
     
     private let circleLayer: CAShapeLayer = { () -> CAShapeLayer in
         let circleLayer = CAShapeLayer()
-        circleLayer.strokeColor = UIColor.clearColor().CGColor
+        circleLayer.strokeColor = UIColor.clear.cgColor
         
-        circleLayer.fillColor = defaultCircleColor.CGColor // circleColor の didSet でも変えているけど初期値を入れておく
+        circleLayer.fillColor = defaultCircleColor.cgColor // circleColor の didSet でも変えているけど初期値を入れておく
         
         // circleDiameter の didSet でも変えているけど初期値をきちんと入れておく
-        let rect = CGRectMake(0, 0, defaultCircleDiameter, defaultCircleDiameter)
-        circleLayer.path     = UIBezierPath(ovalInRect: rect).CGPath
+        let rect = CGRect(x: 0, y: 0, width: defaultCircleDiameter, height: defaultCircleDiameter)
+        circleLayer.path     = UIBezierPath(ovalIn: rect).cgPath
         circleLayer.bounds   = rect
         
         return circleLayer
@@ -82,22 +82,22 @@ public class LocusView: UIView {
     
     private let tailLayer: CAShapeLayer = { () -> CAShapeLayer in
         let tailLayer = CAShapeLayer()
-        tailLayer.fillColor = UIColor.clearColor().CGColor
-        tailLayer.lineJoin  = kCALineJoinRound
-        tailLayer.lineCap   = kCALineCapRound
+        tailLayer.fillColor = UIColor.clear.cgColor
+        tailLayer.lineJoin  = CAShapeLayerLineJoin.round
+        tailLayer.lineCap   = CAShapeLayerLineCap.round
         
         // tailColor の didSet でも変えているけど初期値を入れておく
-        tailLayer.strokeColor = defaultTailColor.CGColor
+        tailLayer.strokeColor = defaultTailColor.cgColor
         tailLayer.lineWidth   = defaultCircleDiameter
         
         return tailLayer
     }()
     
-    private let timerInterval: NSTimeInterval = 1.0 / 100.0 // 100 Hz ってことで
+    private let timerInterval: TimeInterval = 1.0 / 100.0 // 100 Hz ってことで
 
     // MARK:  Private Ivars
     
-    private var timer: NSTimer?
+    private var timer: Timer?
     
     private var pointHistories: [CGPoint] = []
     
@@ -110,13 +110,13 @@ public class LocusView: UIView {
     private var currentPresentationPoint: CGPoint {
         get {
             let point: CGPoint
-            if let p = circleLayer.presentationLayer() as? CALayer {
+            if let p = circleLayer.presentation() {
                 point = p.position
             }
             else {
                 point = circleLayer.position
             }
-            return normalizePoint(point)
+            return normalizePoint(point: point)
         }
     }
     
@@ -127,7 +127,7 @@ public class LocusView: UIView {
             let uniqPoints: [CGPoint] = { () -> [CGPoint] in
                 var uniqPoints: [CGPoint] = []
                 var beforePoint: CGPoint = currentPresentationPoint
-                for point in pointHistories.reverse() {
+                for point in pointHistories.reversed() {
                     // 単純な重複削除
                     if point == beforePoint {
                         continue
@@ -144,9 +144,9 @@ public class LocusView: UIView {
             }()
             
             let path: UIBezierPath = UIBezierPath()
-            path.moveToPoint(realizePoint(currentPresentationPoint)) // 最初と最後は必ず現在の値
+            path.move(to: realizePoint(point: currentPresentationPoint)) // 最初と最後は必ず現在の値
             for p in uniqPoints {
-                path.addLineToPoint(realizePoint(p))
+                path.addLine(to: realizePoint(point: p))
             }
             return path
         }
@@ -190,7 +190,7 @@ public class LocusView: UIView {
     
     override public func layoutSubviews() {
         super.layoutSubviews()
-        tailLayer.path = bezierPathFromPointHistories.CGPath
+        tailLayer.path = bezierPathFromPointHistories.cgPath
     }
     
     // MARK:  Move to Position
@@ -198,10 +198,10 @@ public class LocusView: UIView {
     public func moveToPoint(point: CGPoint) {
         CATransaction.begin()
         CATransaction.setAnimationDuration(animationDuration)
-        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut))
+        CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut))
         
-        circleLayer.position = realizePoint(point)
-        tailLayer.path = bezierPathFromPointHistories.CGPath
+        circleLayer.position = realizePoint(point: point)
+        tailLayer.path = bezierPathFromPointHistories.cgPath
         
         CATransaction.commit()
     }
@@ -209,31 +209,31 @@ public class LocusView: UIView {
     // MARK:  Convert Position
     
     private func normalizePoint(point: CGPoint) -> CGPoint {
-        return CGPointMake(point.x / bounds.size.width, point.y / bounds.size.height);
+        return CGPoint(x: point.x / bounds.size.width, y: point.y / bounds.size.height)
     }
     
     private func realizePoint(point: CGPoint) -> CGPoint {
-        return CGPointMake(point.x * bounds.size.width, point.y * bounds.size.height);
+        return CGPoint(x: point.x * bounds.size.width, y: point.y * bounds.size.height)
     }
     
     // MARK:  Timer
     
     private func startTimer() {
         stopTimer()
-        let timer = NSTimer(timeInterval: timerInterval, target: self, selector: Selector("fireTimer:"), userInfo: nil, repeats: true)
-        NSRunLoop.mainRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+        let timer = Timer(timeInterval: timerInterval, target: self, selector: Selector(("fireTimer:")), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer, forMode: .common)
         self.timer = timer
     }
     
     private func stopTimer() {
-        if let timer = timer where timer.valid {
+        if let timer = timer, timer.isValid {
             timer.invalidate()
             self.timer = nil
         }
     }
     
     // @objc や @IBAction を付けておけば Objective-C の msg_send() が効くので NSTimer からの呼び出しも private で定義出来る。
-    @objc private func fireTimer(timer: NSTimer) {
+    @objc private func fireTimer(_ timer: Timer) {
         pointHistories.append(currentPresentationPoint)
         while pointHistories.count > pointHistoriesMaxCount {
             pointHistories.removeFirst()
